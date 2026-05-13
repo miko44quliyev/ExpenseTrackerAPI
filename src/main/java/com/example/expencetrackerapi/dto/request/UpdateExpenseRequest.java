@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateExpenseRequest {
+public class UpdateExpenseRequest {
     @NotBlank
     private String title;
 
@@ -25,14 +24,4 @@ public class CreateExpenseRequest {
 
     @NotBlank
     private PaymentMethod paymentMethod;
-
-    @NotBlank
-    private Long accountId;
-
-    @NotBlank
-    private Long categoryId;
-
-    @NotBlank
-    private Long budgetId;
-
 }
