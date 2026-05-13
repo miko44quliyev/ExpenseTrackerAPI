@@ -5,6 +5,7 @@ import com.example.expencetrackerapi.dto.request.UpdateExpenseRequest;
 import com.example.expencetrackerapi.dto.response.ExpenseResponse;
 import com.example.expencetrackerapi.dto.response.ExpenseResponseSummary;
 import com.example.expencetrackerapi.service.ExpenseService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public ResponseEntity<ExpenseResponse> create(@RequestBody CreateExpenseRequest request) {
+    public ResponseEntity<ExpenseResponse> create(@RequestBody @Valid CreateExpenseRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.create(request));
     }
 
