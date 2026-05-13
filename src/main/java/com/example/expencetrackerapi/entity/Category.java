@@ -1,6 +1,5 @@
 package com.example.expencetrackerapi.entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,17 +14,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Category {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+  @NotNull
+  @ManyToOne
+  @JoinColumn(name = "account_id")
+  private Account account;
 
-    @NotBlank
-    private String name;
+  @NotBlank private String name;
 
-    private String description;
+  private String description;
 }

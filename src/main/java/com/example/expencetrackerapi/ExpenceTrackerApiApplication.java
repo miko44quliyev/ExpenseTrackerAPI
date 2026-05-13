@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ExpenceTrackerApiApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ExpenceTrackerApiApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(ExpenceTrackerApiApplication.class, args);
+  }
 }
