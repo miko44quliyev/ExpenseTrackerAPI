@@ -2,6 +2,7 @@ package com.example.expencetrackerapi.dto.request;
 
 import com.example.expencetrackerapi.entity.PaymentMethod;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,16 +24,15 @@ public class CreateExpenseRequest {
     @NotBlank
     private LocalDate expenseDate;
 
-    @NotBlank
+    @NotNull
     private PaymentMethod paymentMethod;
 
-    @NotBlank
+    @NotNull
     private Long accountId;
 
-    @NotBlank
+    @NotNull
     private Long categoryId;
 
-    @NotBlank
     private Long budgetId;
 
 }
