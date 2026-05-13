@@ -15,12 +15,13 @@ import com.example.expencetrackerapi.repository.AccountRepository;
 import com.example.expencetrackerapi.repository.BudgetRepository;
 import com.example.expencetrackerapi.repository.CategoryRepository;
 import com.example.expencetrackerapi.repository.ExpenseRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final AccountRepository accountRepository;
