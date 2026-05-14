@@ -8,37 +8,38 @@ import com.example.expencetrackerapi.entity.Account;
 import com.example.expencetrackerapi.exception.ResourceNotFoundException;
 import com.example.expencetrackerapi.mapper.AccountMapper;
 import com.example.expencetrackerapi.repository.AccountRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
-  private final AccountRepository accountRepository;
-  private final AccountMapper accountMapper;
+    private final AccountRepository accountRepository;
+    private final AccountMapper accountMapper;
 
-  public AccountService(AccountRepository accountRepository, AccountMapper accountMapper) {
-    this.accountRepository = accountRepository;
-    this.accountMapper = accountMapper;
-  }
-
-  public List<AccountResponseSummary> findAll() {
-    List<Account> accounts = accountRepository.findAll();
-    List<AccountResponseSummary> summary = new ArrayList<>();
-
-    for (Account account : accounts) {
-      summary.add(accountMapper.toSummary(account));
+    public AccountService(AccountRepository accountRepository, AccountMapper accountMapper) {
+        this.accountRepository = accountRepository;
+        this.accountMapper = accountMapper;
     }
-    return summary;
-  }
 
-  public Account findById(Long id) {
-    return accountRepository
-        .findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Account not found with this id: " + id));
-  }
+    public List<AccountResponseSummary> findAll() {
+        List<Account> accounts = accountRepository.findAll();
+        List<AccountResponseSummary> summary = new ArrayList<>();
 
-    public AccountResponse create(CreateAccountRequest request){
+        for (Account account : accounts) {
+            summary.add(accountMapper.toSummary(account));
+        }
+        return summary;
+    }
+
+    public Account findById(Long id) {
+        return accountRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found with this id: " + id));
+    }
+
+    public AccountResponse create(CreateAccountRequest request) {
         checkEmailExists(request.getEmail());
 
         Account account = new Account();
@@ -47,44 +48,45 @@ public class AccountService {
         account.setCurrentBalance(request.getCurrentBalance());
         accountRepository.save(account);
 
-    return accountMapper.toResponse(account);
-  }
+        return accountMapper.toResponse(account);
+    }
 
-    public AccountResponse update(Long id, UpdateAccountRequest request){
+    public AccountResponse update(Long id, UpdateAccountRequest request) {
         checkEmailExists(request.getEmail());
 
         Account account = findById(id);
-        if(request.getEmail() != null){
+        if (request.getEmail() != null) {
             account.setEmail(request.getEmail());
         }
-        if(request.getFullName() != null){
+        if (request.getFullName() != null) {
             account.setFullName(request.getFullName());
         }
-        if(request.getCurrentBalance() != null){
+        if (request.getCurrentBalance() != null) {
             account.setCurrentBalance(request.getCurrentBalance());
+        }
+
+        if (request.getFullName() != null) {
+            account.setFullName(request.getFullName());
+
         }
         accountRepository.save(account);
         return accountMapper.toResponse(account);
     }
-    if (request.getFullName() != null) {
-      account.setFullName(request.getFullName());
-    }
-    accountRepository.save(account);
-    return accountMapper.toResponse(account);
-  }
 
-    public void checkEmailExists(String email){
+    public void checkEmailExists(String email) {
         Account account = accountRepository.findAccountByEmail(email);
 
-        if(account == null) {
+        if (account == null) {
             return;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Account with this email exists");
         }
     }
-  public void delete(Long id) {
-    Account account = findById(id);
-    accountRepository.delete(account);
-  }
+
+    public void delete(Long id) {
+        Account account = findById(id);
+        accountRepository.delete(account);
+    }
 }
+
+
