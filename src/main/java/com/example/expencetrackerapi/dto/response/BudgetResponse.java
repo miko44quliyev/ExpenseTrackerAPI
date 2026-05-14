@@ -1,13 +1,15 @@
 package com.example.expencetrackerapi.dto.response;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 public class BudgetResponse {
 
   private Long id;
   private Long categoryId;
+  private Long AccountId;
   private String categoryName;
   private BigDecimal amountLimit;
   private LocalDate startDate;
@@ -68,5 +70,13 @@ public class BudgetResponse {
 
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public Long getAccountId() {
+    return AccountId;
+  }
+
+  public void setAccountId(Long accountId) {
+    AccountId = accountId;
   }
 }

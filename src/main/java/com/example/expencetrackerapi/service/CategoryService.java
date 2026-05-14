@@ -1,7 +1,7 @@
 package com.example.expencetrackerapi.service;
 
 import com.example.expencetrackerapi.dto.request.CategoryRequest;
-import com.example.expencetrackerapi.dto.request.CategoryResponse;
+import com.example.expencetrackerapi.dto.response.CategoryResponse;
 import com.example.expencetrackerapi.entity.Account;
 import com.example.expencetrackerapi.entity.Category;
 import com.example.expencetrackerapi.exception.ResourceNotFoundException;

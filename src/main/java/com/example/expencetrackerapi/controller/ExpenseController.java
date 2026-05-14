@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/expenses") // Matching your /api/accounts style
+@RequestMapping("/api/expenses")
 public class ExpenseController {
 
   private final ExpenseService expenseService;

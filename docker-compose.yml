@@ -2,15 +2,13 @@ services:
   db:
     image: mysql:8.0
     container_name: devops-db
-    env_file:
-      - .env
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - devops-db-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - devops-network
     healthcheck:
