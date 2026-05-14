@@ -39,6 +39,8 @@ public class AccountService {
     }
 
     public AccountResponse create(CreateAccountRequest request){
+        checkEmailExists(request.getEmail());
+
         Account account = new Account();
         account.setEmail(request.getEmail());
         account.setFullName(request.getFullName());
@@ -49,12 +51,17 @@ public class AccountService {
     }
 
     public AccountResponse update(Long id, UpdateAccountRequest request){
+        checkEmailExists(request.getEmail());
+
         Account account = findById(id);
         if(request.getEmail() != null){
             account.setEmail(request.getEmail());
         }
         if(request.getFullName() != null){
             account.setFullName(request.getFullName());
+        }
+        if(request.getCurrentBalance() != null){
+            account.setCurrentBalance(request.getCurrentBalance());
         }
         accountRepository.save(account);
         return accountMapper.toResponse(account);
@@ -65,4 +72,14 @@ public class AccountService {
         accountRepository.delete(account);
     }
 
+    public void checkEmailExists(String email){
+        Account account = accountRepository.findAccountByEmail(email);
+
+        if(account == null) {
+            return;
+        }
+        else {
+            throw new IllegalArgumentException("Account with this email exists");
+        }
+    }
 }
