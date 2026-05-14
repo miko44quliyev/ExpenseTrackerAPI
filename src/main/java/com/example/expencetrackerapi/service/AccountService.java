@@ -43,7 +43,6 @@ public class AccountService {
         account.setEmail(request.getEmail());
         account.setFullName(request.getFullName());
         account.setCurrentBalance(request.getCurrentBalance());
-
         accountRepository.save(account);
 
         return accountMapper.toResponse(account);
