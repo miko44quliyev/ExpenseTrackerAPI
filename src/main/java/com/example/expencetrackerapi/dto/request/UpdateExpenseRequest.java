@@ -3,25 +3,21 @@ package com.example.expencetrackerapi.dto.request;
 import com.example.expencetrackerapi.entity.PaymentMethod;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateExpenseRequest {
-    @NotBlank
-    private String title;
+  @NotBlank private String title;
 
-    @Positive
-    private BigDecimal amount;
+  @Positive private BigDecimal amount;
 
-    @NotBlank
-    private LocalDate expenseDate;
+  @NotBlank private LocalDate expenseDate;
 
-    @NotBlank
-    private PaymentMethod paymentMethod;
+  @NotBlank private PaymentMethod paymentMethod;
 }
