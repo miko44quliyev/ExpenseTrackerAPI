@@ -18,6 +18,10 @@ public class BudgetMapper {
         if (budget.getCategory() != null) {
             response.setCategoryId(budget.getCategory().getId());
             response.setCategoryName(budget.getCategory().getName());
+
+            if (budget.getCategory().getAccount() != null) {
+                response.setAccountId(budget.getCategory().getAccount().getId());
+            }
         }
 
         return response;
