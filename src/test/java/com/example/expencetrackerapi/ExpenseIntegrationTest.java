@@ -48,8 +48,8 @@ class ExpenseIntegrationTest {
     void setup() {
 
         expenseRepository.deleteAll();
-        categoryRepository.deleteAll();
         accountRepository.deleteAll();
+        categoryRepository.deleteAll();
 
         account = new Account();
         account.setFullName("Test User");
