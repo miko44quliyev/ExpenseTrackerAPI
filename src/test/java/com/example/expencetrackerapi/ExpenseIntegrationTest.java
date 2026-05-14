@@ -46,13 +46,9 @@ class ExpenseIntegrationTest {
     private Category category;
     @BeforeEach
     void setup() {
-
-        @BeforeEach
-        void setup() {
-            // Delete in reverse order of foreign key dependencies
             expenseRepository.deleteAll();
-            categoryRepository.deleteAll();    // Delete categories first
-            accountRepository.deleteAll();     // Then delete accounts
+            categoryRepository.deleteAll();
+            accountRepository.deleteAll();
 
             account = new Account();
             account.setFullName("Test User");
@@ -65,7 +61,7 @@ class ExpenseIntegrationTest {
             category.setDescription("Food expenses");
             category.setAccount(account);
             category = categoryRepository.save(category);
-        }
+
     }
     @Test
     void shouldCreateExpense() throws Exception {
