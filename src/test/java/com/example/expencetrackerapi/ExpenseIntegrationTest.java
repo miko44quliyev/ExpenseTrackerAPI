@@ -47,21 +47,25 @@ class ExpenseIntegrationTest {
     @BeforeEach
     void setup() {
 
-        expenseRepository.deleteAll();
-        accountRepository.deleteAll();
-        categoryRepository.deleteAll();
+        @BeforeEach
+        void setup() {
+            // Delete in reverse order of foreign key dependencies
+            expenseRepository.deleteAll();
+            categoryRepository.deleteAll();    // Delete categories first
+            accountRepository.deleteAll();     // Then delete accounts
 
-        account = new Account();
-        account.setFullName("Test User");
-        account.setEmail("test@gmail.com");
-        account.setCurrentBalance(new BigDecimal("1000.00"));
-        account = accountRepository.save(account);
+            account = new Account();
+            account.setFullName("Test User");
+            account.setEmail("test@gmail.com");
+            account.setCurrentBalance(new BigDecimal("1000.00"));
+            account = accountRepository.save(account);
 
-        category = new Category();
-        category.setName("Food");
-        category.setDescription("Food expenses");
-        category.setAccount(account);
-        category = categoryRepository.save(category);
+            category = new Category();
+            category.setName("Food");
+            category.setDescription("Food expenses");
+            category.setAccount(account);
+            category = categoryRepository.save(category);
+        }
     }
     @Test
     void shouldCreateExpense() throws Exception {
