@@ -8,6 +8,7 @@ import com.example.expencetrackerapi.exception.ResourceNotFoundException;
 import com.example.expencetrackerapi.mapper.BudgetMapper;
 import com.example.expencetrackerapi.repository.BudgetRepository;
 import com.example.expencetrackerapi.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class BudgetService {
         this.budgetMapper = budgetMapper;
     }
 
+    @Transactional
     public BudgetResponse create(CreateBudgetRequest request) {
         Budget budget = new Budget();
         budget.setAmountLimit(request.getAmountLimit());
@@ -44,6 +46,7 @@ public class BudgetService {
         return budgetMapper.toResponse(saved);
     }
 
+
     public List<BudgetResponse> getAll() {
         List<Budget> budgets = budgetRepository.findAll();
         List<BudgetResponse> responses = new ArrayList<>();
@@ -59,6 +62,7 @@ public class BudgetService {
         return budgetMapper.toResponse(budget);
     }
 
+    @Transactional
     public BudgetResponse update(Long id, CreateBudgetRequest request) {
         Budget budget = budgetRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Budget not found with id: " + id));
@@ -76,6 +80,7 @@ public class BudgetService {
         return budgetMapper.toResponse(budgetRepository.save(budget));
     }
 
+    @Transactional
     public void delete(Long id) {
         if (!budgetRepository.existsById(id)) {
             throw new ResourceNotFoundException("Budget not found with id: " + id);
