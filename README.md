@@ -59,52 +59,71 @@ Clean layered architecture:
 
 ## 🗄️ Database Design
 
+### 👤 Account
+| Field           | Type          | Notes                        |
+|-----------------|---------------|------------------------------|
+| id              | Long          | PK, auto-increment           |
+| full_name       | varchar(255)  |                              |
+| email           | varchar(255)  | Not null, valid email format |
+| current_balance | decimal(10,2) |                              |
+| created_at      | timestamp     | Set on persist               |
+
 ### 📂 Category
-| Field       | Type          | Notes             |
-|-------------|---------------|-------------------|
-| id          | bigint        | PK, auto-increment|
-| name        | varchar(100)  | Not null, unique  |
-| description | varchar(255)  |                   |
-| created_at  | timestamp     |                   |
-| updated_at  | timestamp     |                   |
+| Field       | Type          | Notes              |
+|-------------|---------------|--------------------|
+| id          | Long          | PK, auto-increment |
+| name        | varchar(100)  | Not null, unique   |
+| description | varchar(255)  |                    |
+| created_at  | timestamp     |                    |
+| updated_at  | timestamp     |                    |
 
 ### 📊 Budget
-| Field        | Type           | Notes                          |
-|--------------|----------------|--------------------------------|
-| id           | bigint         | PK, auto-increment             |
-| category_id  | bigint         | FK → categories.id             |
-| month        | date           | First day of month (2026-01-01)|
-| limit_amount | decimal(10,2)  | Not null                       |
-| created_at   | timestamp      |                                |
-| updated_at   | timestamp      |                                |
+| Field        | Type          | Notes                           |
+|--------------|---------------|---------------------------------|
+| id           | Long          | PK, auto-increment              |
+| category_id  | Long          | FK → categories.id              |
+| month        | date          | First day of month (2026-01-01) |
+| limit_amount | decimal(10,2) | Not null                        |
+| created_at   | timestamp     |                                 |
+| updated_at   | timestamp     |                                 |
 
 > Unique constraint on `(category_id, month)` — one budget per category per month.
 
 ### 💰 Expense
-| Field          | Type           | Notes              |
-|----------------|----------------|--------------------|
-| id             | bigint         | PK, auto-increment |
-| title          | varchar(100)   | Not null           |
-| amount         | decimal(10,2)  | Not null           |
-| expense_date   | date           | Not null           |
-| payment_method | varchar(20)    | cash, credit_card… |
-| notes          | text           |                    |
-| is_recurring   | boolean        | Default false      |
-| category_id    | bigint         | FK → categories.id |
-| created_at     | timestamp      |                    |
-| updated_at     | timestamp      |                    |
+| Field          | Type          | Notes                  |
+|----------------|---------------|------------------------|
+| id             | Long          | PK, auto-increment     |
+| title          | varchar(255)  |                        |
+| amount         | decimal(10,2) |                        |
+| expense_date   | date          |                        |
+| payment_method | varchar(50)   | Enum: PaymentMethod    |
+| account_id     | Long          | FK → accounts.id       |
+| category_id    | Long          | FK → categories.id     |
+| budget_id      | Long          | FK → budgets.id        |
+| created_at     | timestamp     | Set on persist         |
 
 ---
 
 ## 🔗 Relationships
 
+- `Account` → `Expense` (One-to-Many) — each expense belongs to one account
 - `Category` → `Budget` (One-to-Many) — each category can have a budget per month
 - `Category` → `Expense` (One-to-Many) — each expense belongs to one category
-- Budget for an expense is resolved by matching `category_id` + `month` from `expense_date`
+- `Budget` → `Expense` (One-to-Many) — each expense is linked directly to a budget
 
 ---
 
 ## 📌 API Endpoints
+
+### 👤 Account
+
+| Method | Endpoint               | Description         |
+|--------|------------------------|---------------------|
+| POST   | `/api/accounts`        | Create account      |
+| GET    | `/api/accounts`        | List all accounts   |
+| GET    | `/api/accounts/{id}`   | Get account by ID   |
+| PUT    | `/api/accounts/{id}`   | Update account      |
+| DELETE | `/api/accounts/{id}`   | Delete account      |
 
 ### 📂 Category
 
@@ -263,6 +282,8 @@ Workflow steps:
 
 Deployed using **Render** with a managed **PostgreSQL** database.
 
+🌐 **Live URL:** [https://expensetrackerapi-1-aeen.onrender.com](https://expensetrackerapi-1-aeen.onrender.com)
+
 Required environment variables on Render:
 
 | Variable                  | Value                        |
@@ -284,7 +305,8 @@ Required environment variables on Render:
 
 ## 📊 Key Features
 
-- Full CRUD for expenses, categories, and budgets
+- Full CRUD for expenses, categories, budgets, and accounts
+- Account management with balance tracking
 - Category-based expense grouping
 - Monthly budget per category with limit tracking
 - Payment method tracking
