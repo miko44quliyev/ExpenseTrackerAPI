@@ -1,7 +1,7 @@
 package com.example.expencetrackerapi.mapper;
 
 
-import com.example.expencetrackerapi.dto.request.CategoryResponse;
+import com.example.expencetrackerapi.dto.response.CategoryResponse;
 import com.example.expencetrackerapi.entity.Category;
 import org.springframework.stereotype.Component;
 

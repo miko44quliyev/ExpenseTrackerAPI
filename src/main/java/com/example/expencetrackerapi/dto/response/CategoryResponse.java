@@ -1,4 +1,4 @@
-package com.example.expencetrackerapi.dto.request;
+package com.example.expencetrackerapi.dto.response;
 
 
 import lombok.AllArgsConstructor;
