@@ -29,7 +29,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       DB_URL: ${DB_URL}?useSSL=false&allowPublicKeyRetrieval=true
       DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_PASSWORD: ${DB_PASSWORD}
       DDL_AUTO: update
     depends_on:
       db:

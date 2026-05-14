@@ -16,9 +16,10 @@ import lombok.NoArgsConstructor;
 public class CreateExpenseRequest {
   @NotBlank private String title;
 
+  @NotNull
   @Positive private BigDecimal amount;
 
-  @NotBlank private LocalDate expenseDate;
+  @NotNull private LocalDate expenseDate;
 
   @NotNull private PaymentMethod paymentMethod;
 

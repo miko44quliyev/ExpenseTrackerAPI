@@ -20,7 +20,11 @@ public class ExpenseMapper {
     response.setPaymentMethod(expense.getPaymentMethod());
     response.setAccountId(expense.getAccount().getId());
     response.setCategoryId(expense.getCategory().getId());
-    response.setBudgetId(expense.getBudget().getId());
+    response.setBudgetId(
+            expense.getBudget() != null
+                    ? expense.getBudget().getId()
+                    : null
+    );
     return response;
   }
 
