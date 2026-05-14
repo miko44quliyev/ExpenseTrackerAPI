@@ -1,4 +1,4 @@
-name: ci.yml
+name: Expense_Tracker-CI.yml
 on:
   push:
     branches: [main]
