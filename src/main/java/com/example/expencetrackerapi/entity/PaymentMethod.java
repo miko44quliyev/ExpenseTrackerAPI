@@ -1,9 +1,9 @@
 package com.example.expencetrackerapi.entity;
 
 public enum PaymentMethod {
-    cash,
-    credit_card,
-    debit_card,
-    bank_transfer,
-    mobile_payment
+  CASH,
+  CREDIT_CARD,
+  DEBIT_CARD,
+  BANK_TRANSFER,
+  MOBILE_PAYMENT
 }

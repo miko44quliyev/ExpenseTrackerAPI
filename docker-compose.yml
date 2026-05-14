@@ -4,11 +4,11 @@ services:
     container_name: devops-db
     environment:
       MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - devops-db-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - devops-network
     healthcheck:
@@ -27,7 +27,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       DB_URL: ${DB_URL}?useSSL=false&allowPublicKeyRetrieval=true
       DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_PASSWORD: ${DB_PASSWORD}
       DDL_AUTO: update
     depends_on:
       db:

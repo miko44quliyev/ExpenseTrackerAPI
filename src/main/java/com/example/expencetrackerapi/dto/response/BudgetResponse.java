@@ -1,81 +1,82 @@
 package com.example.expencetrackerapi.dto.response;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 public class BudgetResponse {
 
-    private Long id;
-    private Long accountId;
-    private Long categoryId;
-    private String categoryName;
-    private BigDecimal amountLimit;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalDateTime createdAt;
+  private Long id;
+  private Long categoryId;
+  private Long AccountId;
+  private String categoryName;
+  private BigDecimal amountLimit;
+  private LocalDate startDate;
+  private LocalDate endDate;
+  private LocalDateTime createdAt;
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Long getAccountId() {
-        return accountId;
-    }
+  public Long getCategoryId() {
+    return categoryId;
+  }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
+  public void setCategoryId(Long categoryId) {
+    this.categoryId = categoryId;
+  }
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
+  public String getCategoryName() {
+    return categoryName;
+  }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
+  }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
+  public BigDecimal getAmountLimit() {
+    return amountLimit;
+  }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
+  public void setAmountLimit(BigDecimal amountLimit) {
+    this.amountLimit = amountLimit;
+  }
 
-    public BigDecimal getAmountLimit() {
-        return amountLimit;
-    }
+  public LocalDate getStartDate() {
+    return startDate;
+  }
 
-    public void setAmountLimit(BigDecimal amountLimit) {
-        this.amountLimit = amountLimit;
-    }
+  public void setStartDate(LocalDate startDate) {
+    this.startDate = startDate;
+  }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+  public LocalDate getEndDate() {
+    return endDate;
+  }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+  public void setEndDate(LocalDate endDate) {
+    this.endDate = endDate;
+  }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+  public Long getAccountId() {
+    return AccountId;
+  }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+  public void setAccountId(Long accountId) {
+    AccountId = accountId;
+  }
 }
