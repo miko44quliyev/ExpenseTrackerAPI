@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public class BudgetResponse {
 
     private Long id;
+    private Long accountId;
     private Long categoryId;
     private String categoryName;
     private BigDecimal amountLimit;
@@ -20,6 +21,14 @@ public class BudgetResponse {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public Long getCategoryId() {
