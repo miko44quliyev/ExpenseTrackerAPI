@@ -79,7 +79,7 @@ class AccountIntegrationTest {
         mockMvc.perform(post("/api/accounts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(duplicate)))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -151,7 +151,7 @@ class AccountIntegrationTest {
         mockMvc.perform(put("/api/accounts/" + bobId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updateRequest)))
-                .andExpect(status().isInternalServerError()
+                .andExpect(status().isBadRequest()
                 );
     }
 
