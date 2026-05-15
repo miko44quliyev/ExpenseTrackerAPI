@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 class ExpenseIntegrationTest {
 
     @Autowired
@@ -36,40 +34,45 @@ class ExpenseIntegrationTest {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+
     @Autowired
     private AccountRepository accountRepository;
+
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Autowired
     private ObjectMapper objectMapper;
+
     private Account account;
     private Category category;
+
     @BeforeEach
     void setup() {
-            expenseRepository.deleteAll();
-            categoryRepository.deleteAll();
-            accountRepository.deleteAll();
+        expenseRepository.deleteAll();
+        categoryRepository.deleteAll();
+        accountRepository.deleteAll();
 
-            account = new Account();
-            account.setFullName("Test User");
-            account.setEmail("test@gmail.com");
-            account.setCurrentBalance(new BigDecimal("1000.00"));
-            account = accountRepository.save(account);
+        account = new Account();
+        account.setFullName("Test User");
+        account.setEmail("test@gmail.com");
+        account.setCurrentBalance(new BigDecimal("1000.00"));
+        account = accountRepository.save(account);
 
-            category = new Category();
-            category.setName("Food");
-            category.setDescription("Food expenses");
-            category.setAccount(account);
-            category = categoryRepository.save(category);
-
+        category = new Category();
+        category.setName("Food");
+        category.setDescription("Food expenses");
+        category.setAccount(account);
+        category = categoryRepository.save(category);
     }
+
     @Test
     void shouldCreateExpense() throws Exception {
 
         CreateExpenseRequest request = new CreateExpenseRequest(
                 "Market Shopping",
                 new BigDecimal("100.00"),
-                LocalDate.now(),
+                LocalDate.of(2026, 1, 1),
                 PaymentMethod.CASH,
                 account.getId(),
                 category.getId(),
@@ -81,15 +84,16 @@ class ExpenseIntegrationTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Market Shopping"))
-                .andExpect(jsonPath("$.amount").value(100.00));
+                .andExpect(jsonPath("$.amount").value(100));
     }
+
     @Test
     void shouldUpdateExpense() throws Exception {
 
         Expense expense = new Expense();
         expense.setTitle("Old Title");
         expense.setAmount(new BigDecimal("100"));
-        expense.setExpenseDate(LocalDate.now());
+        expense.setExpenseDate(LocalDate.of(2026, 1, 1));
         expense.setPaymentMethod(PaymentMethod.CASH);
         expense.setAccount(account);
         expense.setCategory(category);
@@ -99,7 +103,7 @@ class ExpenseIntegrationTest {
         UpdateExpenseRequest request = new UpdateExpenseRequest();
         request.setTitle("New Title");
         request.setAmount(new BigDecimal("200"));
-        request.setExpenseDate(LocalDate.now());
+        request.setExpenseDate(LocalDate.of(2026, 1, 2));
         request.setPaymentMethod(PaymentMethod.CASH);
 
         mockMvc.perform(put("/api/expenses/" + expense.getId())
@@ -116,7 +120,7 @@ class ExpenseIntegrationTest {
         Expense expense = new Expense();
         expense.setTitle("Test Expense");
         expense.setAmount(new BigDecimal("50"));
-        expense.setExpenseDate(LocalDate.now());
+        expense.setExpenseDate(LocalDate.of(2026, 1, 1));
         expense.setPaymentMethod(PaymentMethod.CASH);
         expense.setAccount(account);
         expense.setCategory(category);
@@ -134,7 +138,7 @@ class ExpenseIntegrationTest {
         Expense expense = new Expense();
         expense.setTitle("Laptop");
         expense.setAmount(new BigDecimal("300"));
-        expense.setExpenseDate(LocalDate.now());
+        expense.setExpenseDate(LocalDate.of(2026, 1, 1));
         expense.setPaymentMethod(PaymentMethod.CASH);
         expense.setAccount(account);
         expense.setCategory(category);
@@ -145,13 +149,14 @@ class ExpenseIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Laptop"));
     }
+
     @Test
     void shouldDeleteExpense() throws Exception {
 
         Expense expense = new Expense();
         expense.setTitle("Delete Test");
         expense.setAmount(new BigDecimal("20"));
-        expense.setExpenseDate(LocalDate.now());
+        expense.setExpenseDate(LocalDate.of(2026, 1, 1));
         expense.setPaymentMethod(PaymentMethod.CASH);
         expense.setAccount(account);
         expense.setCategory(category);
