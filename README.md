@@ -144,9 +144,6 @@ Clean layered architecture:
 | GET    | `/api/expenses/{id}`              | Get expense by ID        |
 | PUT    | `/api/expenses/{id}`              | Update expense           |
 | DELETE | `/api/expenses/{id}`              | Delete expense           |
-| GET    | `/api/expenses?category={id}`     | Filter by category       |
-| GET    | `/api/expenses?month=2026-01`     | Filter by month          |
-| GET    | `/api/expenses?title={keyword}`   | Search by title          |
 
 ### 📊 Budget
 
@@ -157,7 +154,6 @@ Clean layered architecture:
 | GET    | `/api/budgets/{id}`             | Get budget by ID        |
 | PUT    | `/api/budgets/{id}`             | Update budget           |
 | DELETE | `/api/budgets/{id}`             | Delete budget           |
-| GET    | `/api/budgets?month=2026-01`    | Filter budgets by month |
 
 ---
 
@@ -166,7 +162,7 @@ Clean layered architecture:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/expense-tracker.git
+git clone https://github.com/miko44quliyev/ExpenseTrackerAPI.git
 cd expense-tracker
 ```
 
@@ -180,7 +176,7 @@ cp .env.example .env
 
 `.env.example`:
 ```
-MYSQL_ROOT_PASSWORD=your_password
+MYSQL_PASSWORD=your_password
 MYSQL_DATABASE=expense_tracker
 ```
 
@@ -283,6 +279,8 @@ Workflow steps:
 Deployed using **Render** with a managed **PostgreSQL** database.
 
 🌐 **Live URL:** [https://expensetrackerapi-1-aeen.onrender.com](https://expensetrackerapi-1-aeen.onrender.com)
+
+📋 **Trello Board:** https://trello.com/b/1NTNbbSg/mini-group-project
 
 Required environment variables on Render:
 
