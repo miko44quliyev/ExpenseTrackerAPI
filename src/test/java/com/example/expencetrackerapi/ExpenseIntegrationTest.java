@@ -50,8 +50,8 @@ class ExpenseIntegrationTest {
     @BeforeEach
     void setup() {
         expenseRepository.deleteAll();
-        accountRepository.deleteAll();
         categoryRepository.deleteAll();
+        accountRepository.deleteAll();
 
         account = new Account();
         account.setFullName("Test User");
